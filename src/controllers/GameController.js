@@ -20,7 +20,9 @@ class GameController {
     InputView.readAnswer(this.onInputAnswer.bind(this));
   }
 
-  onInputAnswer(answer) {}
+  onInputAnswer(answer) {
+    const result = this.#baseballGame.match(answer);
+  }
 }
 
 module.exports = GameController;
