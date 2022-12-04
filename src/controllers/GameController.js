@@ -4,7 +4,7 @@ const GameReferee = require('../models/GameReferee');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
-const { GAME_STATUS } = require('../utils/constants');
+const { GAME_STATUS, GAME_COMMAND } = require('../utils/constants');
 
 class GameController {
   #baseballGame;
@@ -47,7 +47,15 @@ class GameController {
 
   onGameClear() {
     OutputView.printGameClear();
+
+    this.inputGameCommand();
   }
+
+  inputGameCommand() {
+    InputView.readGameCommand(this.onInputGameCommand.bind(this));
+  }
+
+  onInputGameCommand(command) {}
 }
 
 module.exports = GameController;
