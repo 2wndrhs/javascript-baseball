@@ -1,11 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const BaseballGame = require('../models/BaseballGame');
-const GameReferee = require('../models/GameReferee');
 
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
+const { validate, isAnswerInput } = require('../utils/Validator');
 const { GAME_STATUS, GAME_COMMAND } = require('../utils/constants');
 
 class GameController {
@@ -29,15 +29,19 @@ class GameController {
   }
 
   inputAnswer() {
-    InputView.readAnswer(this.onInputAnswer.bind(this));
+    InputView.readAnswer((answer) => {
+      try {
+        this.onInputAnswer(answer);
+      } catch (error) {
+        Console.close();
+      }
+    });
   }
 
   onInputAnswer(answer) {
-    GameReferee.reset();
+    validate(answer, isAnswerInput);
 
-    this.#baseballGame.match(answer);
-
-    const result = GameReferee.toString();
+    const result = this.#baseballGame.match(answer);
     OutputView.printResult(result);
 
     this.checkGameStatus();

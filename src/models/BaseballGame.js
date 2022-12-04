@@ -14,10 +14,14 @@ class BaseballGame {
   }
 
   match(trial) {
-    const trialNumber = [...trial].map(Number);
+    GameReferee.reset();
 
+    const trialNumber = [...trial].map(Number);
     const { strike } = GameReferee.judge(this.#answer, trialNumber);
+
     this.checkClearOrFail(strike);
+
+    return GameReferee.toString();
   }
 
   checkClearOrFail(strike) {
