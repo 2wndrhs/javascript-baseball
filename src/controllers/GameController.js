@@ -22,6 +22,8 @@ class GameController {
 
   onInputAnswer(answer) {
     const result = this.#baseballGame.match(answer);
+
+    OutputView.printResult(result);
   }
 }
 

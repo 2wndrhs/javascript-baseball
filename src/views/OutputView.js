@@ -8,6 +8,10 @@ const OutputView = {
   printStarting() {
     Console.print(MESSAGE.START);
   },
+
+  printResult(result) {
+    Console.print(result);
+  },
 };
 
 module.exports = OutputView;
