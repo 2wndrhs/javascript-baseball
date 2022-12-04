@@ -33,13 +33,7 @@ class GameController {
   }
 
   inputAnswer() {
-    InputView.readAnswer((answer) => {
-      try {
-        this.onInputAnswer(answer);
-      } catch (error) {
-        Console.close();
-      }
-    });
+    InputView.readAnswer(this.onInputAnswer.bind(this));
   }
 
   onInputAnswer(answer) {
@@ -64,13 +58,7 @@ class GameController {
   }
 
   inputGameCommand() {
-    InputView.readGameCommand((command) => {
-      try {
-        this.onInputGameCommand(command);
-      } catch (error) {
-        Console.close();
-      }
-    });
+    InputView.readGameCommand(this.onInputGameCommand.bind(this));
   }
 
   onInputGameCommand(command) {
