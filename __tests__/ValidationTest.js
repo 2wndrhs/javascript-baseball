@@ -1,5 +1,9 @@
 /* eslint-disable max-lines-per-function */
-const { validate, isAnswerInput } = require('../src/utils/Validator');
+const {
+  validate,
+  isAnswerInput,
+  isCommandInput,
+} = require('../src/utils/Validator');
 
 describe('Validation 테스트', () => {
   test.each(['12', '012', '890', 'abc', '111'])(
@@ -7,6 +11,15 @@ describe('Validation 테스트', () => {
     (answer) => {
       expect(() => {
         validate(answer, isAnswerInput);
+      }).toThrow();
+    },
+  );
+
+  test.each([' ', '0', 'a', '12'])(
+    '1과 2중 하나의 숫자가 아닐 경우 예외 발생',
+    (command) => {
+      expect(() => {
+        validate(command, isCommandInput);
       }).toThrow();
     },
   );
