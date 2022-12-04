@@ -11,6 +11,7 @@ class GameController {
 
   #gameStatusHandlers = {
     [GAME_STATUS.FAIL]: this.inputAnswer.bind(this),
+    [GAME_STATUS.CLEAR]: this.onGameClear.bind(this),
   };
 
   start() {
@@ -42,6 +43,10 @@ class GameController {
     const gameStatus = this.#baseballGame.getStatus();
 
     this.#gameStatusHandlers[gameStatus]();
+  }
+
+  onGameClear() {
+    OutputView.printGameClear();
   }
 }
 
