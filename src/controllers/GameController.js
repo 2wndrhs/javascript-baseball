@@ -16,12 +16,14 @@ class GameController {
 
   start() {
     OutputView.printStarting();
-    this.setNewGame();
-    this.inputAnswer();
+
+    this.startNewGame();
   }
 
-  setNewGame() {
+  startNewGame() {
     this.#baseballGame = new BaseballGame(GAME_STATUS.PLAYING);
+
+    this.inputAnswer();
   }
 
   inputAnswer() {
@@ -55,7 +57,11 @@ class GameController {
     InputView.readGameCommand(this.onInputGameCommand.bind(this));
   }
 
-  onInputGameCommand(command) {}
+  onInputGameCommand(command) {
+    if (command === GAME_COMMAND.RETRY) {
+      this.startNewGame();
+    }
+  }
 }
 
 module.exports = GameController;
