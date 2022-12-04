@@ -5,7 +5,11 @@ const BaseballGame = require('../models/BaseballGame');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
-const { validate, isAnswerInput } = require('../utils/Validator');
+const {
+  validate,
+  isAnswerInput,
+  isCommandInput,
+} = require('../utils/Validator');
 const { GAME_STATUS, GAME_COMMAND } = require('../utils/constants');
 
 class GameController {
@@ -60,10 +64,18 @@ class GameController {
   }
 
   inputGameCommand() {
-    InputView.readGameCommand(this.onInputGameCommand.bind(this));
+    InputView.readGameCommand((command) => {
+      try {
+        this.onInputGameCommand(command);
+      } catch (error) {
+        Console.close();
+      }
+    });
   }
 
   onInputGameCommand(command) {
+    validate(command, isCommandInput);
+
     if (command === GAME_COMMAND.RETRY) {
       this.startNewGame();
       return;
