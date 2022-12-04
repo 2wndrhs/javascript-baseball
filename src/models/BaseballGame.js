@@ -19,12 +19,12 @@ class BaseballGame {
     const trialNumber = [...trial].map(Number);
     const { strike } = GameReferee.judge(this.#answer, trialNumber);
 
-    this.checkClearOrFail(strike);
+    this.#checkClearOrFail(strike);
 
     return GameReferee.toString();
   }
 
-  checkClearOrFail(strike) {
+  #checkClearOrFail(strike) {
     if (strike === 3) {
       this.#status = GAME_STATUS.CLEAR;
       return;
