@@ -31,6 +31,11 @@ const GameReferee = {
     this.result.ball += 1;
   },
 
+  reset() {
+    this.result.ball = 0;
+    this.result.strike = 0;
+  },
+
   toString() {
     const { ball, strike } = this.result;
 
