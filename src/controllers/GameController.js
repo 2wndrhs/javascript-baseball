@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const BaseballGame = require('../models/BaseballGame');
 const GameReferee = require('../models/GameReferee');
 
@@ -60,7 +62,10 @@ class GameController {
   onInputGameCommand(command) {
     if (command === GAME_COMMAND.RETRY) {
       this.startNewGame();
+      return;
     }
+
+    Console.close();
   }
 }
 
