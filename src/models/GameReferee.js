@@ -18,6 +18,7 @@ const GameReferee = {
         this.countBallsAndStrikes(answer, trialNumber, trialIndex);
       }
     });
+    return this.result;
   },
 
   countBallsAndStrikes(answer, trialNumber, trialIndex) {
